@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<!-- saved from url=(0078)https://learn.logikaschool.com/lesson?lesson=28452&level=1&module=1&task=65917 -->
+<html lang="uk-UA" data-react-helmet="lang"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <script type="module" crossorigin="" src="./Скрипт_files/polyfills.DoDTa2WXkoyxBML.js.завантаження"></script>
+
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="theme-color" content="#000000">
+    <meta name="google" content="notranslate">
+    <title>Скрипт</title>
+    <meta name="csrf-param" content="_csrf-frontend">
+<meta name="csrf-token" content="ukbAv0-leJb6fUgS9U22NtvNoA-cr7FN2o2TD6-btJ-JB7XsAZQh2pg8JFekJtVEr5XyS_fn4Xqc_cFA_NnWwA==">
+
+<script>window.timeLoadStart = new Date().getTime();
+window.isSpaNoReload = true;
+window.isSpaPreload = true;</script>    
+    <script>
+      var path = window.location.pathname;
+
+      var isAcademy = path.indexOf('/academy') !== -1;
+
+      /* Google Tag Manager */
+
+      var GOOGLE_TAG_MANAGER_ID = null;
+      if (isAcademy) GOOGLE_TAG_MANAGER_ID = 'GTM-K7488WV';
+
+      if (GOOGLE_TAG_MANAGER_ID) {
+        (function (w, d, s, l, i) {
+          w[l] = w[l] || [];
+          w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' });
+          var f = d.getElementsByTagName(s)[0],
+            j = d.createElement(s),
+            dl = l != 'dataLayer' ? '&l=' + l : '';
+          j.async = true;
+          j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
+          f.parentNode.insertBefore(j, f);
+        })(window, document, 'script', 'dataLayer', GOOGLE_TAG_MANAGER_ID);
+      }
+
+      window.dataLayer = window.dataLayer || [];
+
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+
+      gtag('js', new Date());
+      window.addEventListener(
+        'submit',
+        function () {
+          dataLayer.push({ event: 'form_submit' });
+        },
+        true,
+      );
+      /* End Google Tag Manager */
+    </script>
+     
+<script src="./Скрипт_files/bundle.tracing.min.js.завантаження"></script>
+<script>
+function initSentry(){
+  const eventLimiter = {};
+  const THROTTLING_TIMEOUT_SECONDS = 30 * 1000;
+
+  function throttleEvent (event, hint) {
+    const exception = hint && hint.originalException;
+
+    if (exception === null || exception === undefined) {
+      return event;
+    }
+
+    const message =
+      typeof exception === 'string' ? exception : exception.message;
+
+    if (message in eventLimiter) {
+      return null;
+    }
+
+    eventLimiter[message] = true;
+
+    setTimeout(
+      function(){
+        delete eventLimiter[message];
+      },
+      THROTTLING_TIMEOUT_SECONDS,
+    );
+
+    return event;
+  }
+
+  Sentry.init({
+    integrations: [Sentry.browserTracingIntegration()],
+    tracesSampleRate: 0.1,
+    beforeSend: function(event, hint) {
+      if (!event.extra) event.extra = {};
+      return throttleEvent(event, hint);
+    },
+    denyUrls: [
+      // Facebook flakiness
+      /graph\.facebook\.com/i,
+      // Facebook blocked
+      /connect\.facebook\.net\/en_US\/all\.js/i,
+      // Woopra flakiness
+      /eatdifferent\.com\.woopra-ns\.com/i,
+      /static\.woopra\.com\/js\/woopra\.js/i,
+      // Chrome extensions
+      /extensions\//i,
+      /^chrome:\/\//i,
+      // Other plugins
+      /127\.0\.0\.1:4001\/isrunning/i, // Cacaoweb
+      /webappstoolbarba\.texthelp\.com\//i,
+      /metrics\.itunes\.apple\.com\.edgesuite\.net\//i,
+    ],
+    ignoreErrors: [
+      // Random plugins/extensions
+      'top.GLOBALS',
+      // See: http://blog.errorception.com/2012/03/tale-of-unfindable-js-error.html
+      'originalCreateNotification',
+      'canvas.contentDocument',
+      'MyApp_RemoveAllHighlights',
+      'http://tt.epicplay.com',
+      "Can't find variable: ZiteReader",
+      'jigsaw is not defined',
+      'ComboSearch is not defined',
+      'http://loading.retry.widdit.com/',
+      'atomicFindClose',
+      // Facebook borked
+      'fb_xd_fragment',
+      // ISP "optimizing" proxy - `Cache-Control: no-transform` seems to
+      // reduce this. (thanks @acdha)
+      // See http://stackoverflow.com/questions/4113268
+      'bmi_SafeAddOnload',
+      'EBCallBackMessageReceived',
+      // See http://toolbar.conduit.com/Developer/HtmlAndGadget/Methods/JSInjection.aspx
+      'conduitPage',
+      // Videoplatform
+      'Bridge Channel send: no opened channel',
+      'Constraint could not be satisfied:',
+      'Could not start audio source',
+      'Could not start video source',
+      'Failed to fetch',
+      'Feature discovery error',
+      'Focus error, retry after',
+      'No opened channel',
+      'no peer media info available for',
+      'Not connected',
+      'NotSupportedError:',
+      'Ping timeout',
+      'Requested device(s) was/were not found:',
+      'Strophe:',
+      'The timeout for the confirmation about leaving the room expired',
+      'User canceled screen sharing prompt',
+      'User denied permission to use device(s):',
+      'Websocket error',
+      'You are already in the room!',
+      // scratch
+      /^Error in Scratch GUI:/,
+      "Cannot read property 'currentCostume' of undefined",
+      "Cannot set property 'value' of null",
+      'Tried to glow stack on block that does not exist.',
+      'DataCloneError: The object could not be cloned.',
+      "Failed to execute 'getImageData' on 'CanvasRenderingContext2D'",
+      "Cannot read property 'workspace' of null",
+      "Cannot read property 'getCostumes' of undefined",
+      "Cannot read property 'dragBlock' of null",
+      "Failed to execute 'shaderSource' on 'WebGLRenderingContext': parameter 1 is not of type 'WebGLShader'.",
+      "Cannot read property 'blockDragSurface_' of null",
+      'this.finalPath.add is not a function',
+    ],
+    dsn: 'https://9856a818567d4e17a354250581c19f6d@sentry.io/1339803',
+    maxBreadcrumbs: 15,
+    release: 'algoritmika-singlepage@2024.04.25-140403',
+    sampleRate: 0.5,
+  });
+}
+initSentry();
+</script>
+
+
+    <script type="module" crossorigin="" src="./Скрипт_files/index.-6_2V7pELnjSHag.js.завантаження"></script>
+    <link rel="modulepreload" crossorigin="" href="https://learn.logikaschool.com/singlepage/root/assets/js/BCM59w4Lk83odZ2.js">
+    <link rel="stylesheet" crossorigin="" href="./Скрипт_files/index-CuDAD2jy.css">
+  <style data-styled="active" data-styled-version="6.1.8"></style><style data-styled="active" data-styled-version="6.1.8"></style><link rel="modulepreload" as="script" crossorigin="" href="https://learn.logikaschool.com/singlepage/root/assets/js/CUZ4nLu-AmghB4R.js"><link rel="modulepreload" as="script" crossorigin="" href="https://learn.logikaschool.com/singlepage/root/assets/js/C6lNxgTgQXtkRzL.js"><link rel="modulepreload" as="script" crossorigin="" href="https://learn.logikaschool.com/singlepage/root/assets/js/B_GOE-wJgNqB-Ad.js"><link rel="modulepreload" as="script" crossorigin="" href="https://learn.logikaschool.com/singlepage/root/assets/js/Dywg0Mje6S1MHjL.js"><link rel="modulepreload" as="script" crossorigin="" href="https://learn.logikaschool.com/singlepage/root/assets/js/CGDlv9YNu94H0xc.js"><link rel="modulepreload" as="script" crossorigin="" href="https://learn.logikaschool.com/singlepage/root/assets/js/COOxmGlmP6B5Zuo.js"><link rel="modulepreload" as="script" crossorigin="" href="https://learn.logikaschool.com/singlepage/root/assets/js/C6soxY_P4pw_Yti.js"><link rel="modulepreload" as="script" crossorigin="" href="https://learn.logikaschool.com/singlepage/root/assets/js/Bql290edjqz8qKU.js"><link rel="modulepreload" as="script" crossorigin="" href="https://learn.logikaschool.com/singlepage/root/assets/js/CuKSVCj09sgXmUy.js"><link rel="modulepreload" as="script" crossorigin="" href="https://learn.logikaschool.com/singlepage/root/assets/js/CZKZZRssN12z5hY.js"><link rel="modulepreload" as="script" crossorigin="" href="https://learn.logikaschool.com/singlepage/root/assets/js/DMf9lWGzzG_7sDL.js"><link rel="modulepreload" as="script" crossorigin="" href="https://learn.logikaschool.com/singlepage/root/assets/js/3Ff-fbIR_CVWCCE.js"><link rel="modulepreload" as="script" crossorigin="" href="https://learn.logikaschool.com/singlepage/root/assets/js/DgxVnInCAid6R3d.js"><link rel="modulepreload" as="script" crossorigin="" href="https://learn.logikaschool.com/singlepage/root/assets/js/RdGLsz6F5vCtkJB.js"><link rel="modulepreload" as="script" crossorigin="" href="https://learn.logikaschool.com/singlepage/root/assets/js/C-QafTOFfM1mxBX.js"><link rel="modulepreload" as="script" crossorigin="" href="https://learn.logikaschool.com/singlepage/root/assets/js/bSyVw32xSyBXFp9.js"><link rel="modulepreload" as="script" crossorigin="" href="https://learn.logikaschool.com/singlepage/root/assets/js/BNqFOLfECc7SzRK.js"><link rel="modulepreload" as="script" crossorigin="" href="https://learn.logikaschool.com/singlepage/root/assets/js/DTSV6JgEaxiBr13.js"><link rel="modulepreload" as="script" crossorigin="" href="https://learn.logikaschool.com/singlepage/root/assets/js/CZRxl6gAyoYwX7A.js"><link rel="modulepreload" as="script" crossorigin="" href="https://learn.logikaschool.com/singlepage/root/assets/js/DB7RUM8wAiO794I.js"><link rel="modulepreload" as="script" crossorigin="" href="https://learn.logikaschool.com/singlepage/root/assets/js/B_SbLdDu3CZcpE5.js"><link rel="modulepreload" as="script" crossorigin="" href="https://learn.logikaschool.com/singlepage/root/assets/js/DPh_pefRf-0PIYI.js"><link rel="modulepreload" as="script" crossorigin="" href="https://learn.logikaschool.com/singlepage/root/assets/js/Bvi6qD3QK_fxe4v.js"><link rel="modulepreload" as="script" crossorigin="" href="https://learn.logikaschool.com/singlepage/root/assets/js/BVOmGuz6s2G9RGQ.js"><link rel="modulepreload" as="script" crossorigin="" href="https://learn.logikaschool.com/singlepage/root/assets/js/Cgbrvrkn4-eYTWL.js"><link rel="modulepreload" as="script" crossorigin="" href="https://learn.logikaschool.com/singlepage/root/assets/js/CWZfVCYa4rrO0XB.js"><link rel="modulepreload" as="script" crossorigin="" href="https://learn.logikaschool.com/singlepage/root/assets/js/CBDpF5IDAJifS91.js"><link rel="modulepreload" as="script" crossorigin="" href="https://learn.logikaschool.com/singlepage/root/assets/js/k2hyMKSy-Cv23qm.js"><link rel="modulepreload" as="script" crossorigin="" href="https://learn.logikaschool.com/singlepage/root/assets/js/D550kKSQ8fi1Wab.js"><link rel="modulepreload" as="script" crossorigin="" href="https://learn.logikaschool.com/singlepage/root/assets/js/BOpF9xZlT9yJmdp.js"><link rel="modulepreload" as="script" crossorigin="" href="https://learn.logikaschool.com/singlepage/root/assets/js/y98He5tJTtGWmtM.js"><link rel="modulepreload" as="script" crossorigin="" href="https://learn.logikaschool.com/singlepage/root/assets/js/BMBbHNbyuC_6iRv.js"><link rel="modulepreload" as="script" crossorigin="" href="https://learn.logikaschool.com/singlepage/root/assets/js/BxhNqj1C4vG2fO8.js"><link rel="modulepreload" as="script" crossorigin="" href="https://learn.logikaschool.com/singlepage/root/assets/js/Ci3FF7AUvrAwl2t.js"><link rel="modulepreload" as="script" crossorigin="" href="https://learn.logikaschool.com/singlepage/root/assets/js/CIsx3iw4QWInLif.js"><link rel="modulepreload" as="script" crossorigin="" href="https://learn.logikaschool.com/singlepage/root/assets/js/BCzkBDgDfaGORCu.js"><link rel="modulepreload" as="script" crossorigin="" href="https://learn.logikaschool.com/singlepage/root/assets/js/B0Qwh8QXgn_VPtz.js"><link rel="modulepreload" as="script" crossorigin="" href="https://learn.logikaschool.com/singlepage/root/assets/js/X_hALIZo5reDZOT.js"><link rel="modulepreload" as="script" crossorigin="" href="https://learn.logikaschool.com/singlepage/root/assets/js/C2O4d1-vCxWZsUg.js"><link rel="modulepreload" as="script" crossorigin="" href="https://learn.logikaschool.com/singlepage/root/assets/js/Dmiid0qpJ7JdNZ_.js"><link rel="modulepreload" as="script" crossorigin="" href="https://learn.logikaschool.com/singlepage/root/assets/js/D1WsY-wUFJVEyr0.js"><link rel="modulepreload" as="script" crossorigin="" href="https://learn.logikaschool.com/singlepage/root/assets/js/BfevS9PuNt2-JNS.js"><link rel="modulepreload" as="script" crossorigin="" href="https://learn.logikaschool.com/singlepage/root/assets/js/B17fqfdv8x3ILwk.js"><link rel="modulepreload" as="script" crossorigin="" href="https://learn.logikaschool.com/singlepage/root/assets/js/B81JHXZ5h9EzF6X.js"><link rel="modulepreload" as="script" crossorigin="" href="https://learn.logikaschool.com/singlepage/root/assets/js/DpMC5W8PfyxeKoq.js"><link rel="modulepreload" as="script" crossorigin="" href="https://learn.logikaschool.com/singlepage/root/assets/js/D_IL2aieoTQQrpE.js"><link rel="modulepreload" as="script" crossorigin="" href="https://learn.logikaschool.com/singlepage/root/assets/js/D_9qxfFQf6faEQ3.js"><link rel="modulepreload" as="script" crossorigin="" href="https://learn.logikaschool.com/singlepage/root/assets/js/CrZQz_32Ezmt-hW.js"><link rel="modulepreload" as="script" crossorigin="" href="https://learn.logikaschool.com/singlepage/root/assets/js/D4_syN9iuoNFBNB.js"><link rel="modulepreload" as="script" crossorigin="" href="https://learn.logikaschool.com/singlepage/root/assets/js/D5b5gNlE1ZLxlmo.js"><link rel="modulepreload" as="script" crossorigin="" href="https://learn.logikaschool.com/singlepage/root/assets/js/CB3iQicH9dLedDE.js"><link rel="modulepreload" as="script" crossorigin="" href="https://learn.logikaschool.com/singlepage/root/assets/js/coeG0dz9JtVj0sz.js"><link rel="modulepreload" as="script" crossorigin="" href="https://learn.logikaschool.com/singlepage/root/assets/js/79CH41r5bxeme4i.js"><link rel="modulepreload" as="script" crossorigin="" href="https://learn.logikaschool.com/singlepage/root/assets/js/hlOOKMG6bXIGHZ1.js"><link rel="modulepreload" as="script" crossorigin="" href="https://learn.logikaschool.com/singlepage/root/assets/js/Vl7XNpSB5ln3Hgd.js"><link rel="modulepreload" as="script" crossorigin="" href="https://learn.logikaschool.com/singlepage/root/assets/js/DjLtSVf89qxpCBE.js"><link rel="modulepreload" as="script" crossorigin="" href="https://learn.logikaschool.com/singlepage/root/assets/js/BHEBwv75qMuQkpO.js"><link rel="modulepreload" as="script" crossorigin="" href="https://learn.logikaschool.com/singlepage/root/assets/js/Bmbm8ycv-T-sMb5.js"><link rel="modulepreload" as="script" crossorigin="" href="https://learn.logikaschool.com/singlepage/root/assets/js/CdVoPpjsoQcMf-T.js"><link rel="shortcut icon" href="https://learn.logikaschool.com/uploads/2021/11/favicon_ukr_1_1635800618.svg?t=1635800618" data-react-helmet="true"><link rel="modulepreload" as="script" crossorigin="" href="https://learn.logikaschool.com/singlepage/root/assets/js/Dgw10KmAjqeGryi.js"><link rel="modulepreload" as="script" crossorigin="" href="https://learn.logikaschool.com/singlepage/root/assets/js/ClsrOuzug2NrAWO.js"><link rel="modulepreload" as="script" crossorigin="" href="https://learn.logikaschool.com/singlepage/root/assets/js/C2Fh_mmRBck1RSb.js"><link rel="modulepreload" as="script" crossorigin="" href="https://learn.logikaschool.com/singlepage/root/assets/js/Boc7DqAdXNqAKs0.js"><link rel="modulepreload" as="script" crossorigin="" href="https://learn.logikaschool.com/singlepage/root/assets/js/CVeZ05JMvpuMsZZ.js"><link rel="modulepreload" as="script" crossorigin="" href="https://learn.logikaschool.com/singlepage/root/assets/js/l9tfD0luqDES74h.js"><link rel="modulepreload" as="script" crossorigin="" href="https://learn.logikaschool.com/singlepage/root/assets/js/CxqUEBgivxdJToG.js"><link rel="modulepreload" as="script" crossorigin="" href="https://learn.logikaschool.com/singlepage/root/assets/js/BQt2IrsjvGiEEN9.js"><link rel="modulepreload" as="script" crossorigin="" href="https://learn.logikaschool.com/singlepage/root/assets/js/C4tyWfDcwSaBOEI.js"><link rel="modulepreload" as="script" crossorigin="" href="https://learn.logikaschool.com/singlepage/root/assets/js/WMG4UGy_A5qIaz3.js"><link rel="modulepreload" as="script" crossorigin="" href="https://learn.logikaschool.com/singlepage/root/assets/js/BUQSbSxhZNau81f.js"><link rel="modulepreload" as="script" crossorigin="" href="https://learn.logikaschool.com/singlepage/root/assets/js/DaHjQKKocZrueEx.js"><link rel="modulepreload" as="script" crossorigin="" href="https://learn.logikaschool.com/singlepage/root/assets/js/dfTSELMt5o0dlSv.js"><link rel="modulepreload" as="script" crossorigin="" href="https://learn.logikaschool.com/singlepage/root/assets/js/BJij5vhEQkFcV71.js"><link rel="stylesheet" href="./Скрипт_files/types-B8W3UWzj.css"><link rel="modulepreload" as="script" crossorigin="" href="https://learn.logikaschool.com/singlepage/root/assets/js/Bm9_MW1RkIEZbGj.js"><link rel="modulepreload" as="script" crossorigin="" href="https://learn.logikaschool.com/singlepage/root/assets/js/CEFTeR9--_bSQ1q.js"><link rel="modulepreload" as="script" crossorigin="" href="https://learn.logikaschool.com/singlepage/root/assets/js/D88idsLWFotV_xB.js"><link rel="modulepreload" as="script" crossorigin="" href="https://learn.logikaschool.com/singlepage/root/assets/js/3EKiyKuumG1K_6v.js"><link rel="modulepreload" as="script" crossorigin="" href="https://learn.logikaschool.com/singlepage/root/assets/js/ss9MvsuOduNUUFa.js"><link rel="modulepreload" as="script" crossorigin="" href="https://learn.logikaschool.com/singlepage/root/assets/js/7LUHl88Q04VVoJO.js"><link rel="modulepreload" as="script" crossorigin="" href="https://learn.logikaschool.com/singlepage/root/assets/js/CRpm98-3Y5UiuBU.js"><link rel="modulepreload" as="script" crossorigin="" href="https://learn.logikaschool.com/singlepage/root/assets/js/CV2xOxFnU77kIZn.js"><link rel="stylesheet" href="./Скрипт_files/index-CTswoO63.css"><link rel="modulepreload" as="script" crossorigin="" href="https://learn.logikaschool.com/singlepage/root/assets/js/XF6LjQRU8u97i-5.js"><link rel="modulepreload" as="script" crossorigin="" href="https://learn.logikaschool.com/singlepage/root/assets/js/BnveIKavOm_ocFh.js"><link rel="modulepreload" as="script" crossorigin="" href="https://learn.logikaschool.com/singlepage/root/assets/js/z5MGc_XHIEu3XJW.js"><link rel="modulepreload" as="script" crossorigin="" href="https://learn.logikaschool.com/singlepage/root/assets/js/BzZVGP4aNS06-57.js"><link rel="modulepreload" as="script" crossorigin="" href="https://learn.logikaschool.com/singlepage/root/assets/js/2kEr_k61NEVUhVs.js"><link rel="modulepreload" as="script" crossorigin="" href="https://learn.logikaschool.com/singlepage/root/assets/js/BY5dF6ZBDu3fUPE.js"><link rel="modulepreload" as="script" crossorigin="" href="https://learn.logikaschool.com/singlepage/root/assets/js/YS633XZUm0zLTRS.js"></head>
+
+  <body class="notranslate">
+        <noscript> You need to enable JavaScript to run this app. </noscript>
+
+    <div id="root"><div class="sc-iiqfCt hPyMni"><div class="sc-iTwQZo eULiYE"><div class="sc-gbOnrL eCWzTI"><img src="./Скрипт_files/ukr_logo_sign_inverse_0_1635840263.svg" alt="" class="sc-a-dDYZ gIAnZq"><button data-qa-id="task-header-button-back" class="sc-dXvPMI gGppdF"><svg width="36" height="36" viewBox="0 0 37 36" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="0.631226" width="36" height="36" rx="6" fill="white"></rect><path d="M24.6432 16.3824H14.8972L19.1452 12.1344C19.6332 11.6464 19.6332 10.8554 19.1452 10.3664C18.6572 9.87738 17.8662 9.87838 17.3772 10.3664L10.9962 16.7474C10.8812 16.8634 10.7892 17.0014 10.7262 17.1544C10.6002 17.4604 10.6002 17.8044 10.7262 18.1094C10.7892 18.2624 10.8812 18.4014 10.9962 18.5164L17.3772 24.8974C17.6212 25.1414 17.9402 25.2634 18.2612 25.2634C18.5822 25.2634 18.9012 25.1414 19.1452 24.8974C19.6332 24.4094 19.6332 23.6184 19.1452 23.1294L14.8972 18.8824H24.6432C25.3332 18.8824 25.8932 18.3224 25.8932 17.6324C25.8932 16.9424 25.3332 16.3824 24.6432 16.3824Z" fill="#292929"></path></svg></button></div><div class="sc-fqLzJb exVeba"><div class="sc-iNa-dwa jjjMCF"><span class="sc-paQqp dnfUCh">Скрипт</span><svg width="7px" height="5px" id="triangle_svg__Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 6 5" xml:space="preserve" class="sc-dmtcdY eASTtf"><path fill="#FFFFFF" d="M5.1,0H1C0.2,0-0.3,0.9,0.2,1.6l2,2.8c0.4,0.5,1.2,0.5,1.6,0l2-2.8C6.4,0.9,5.9,0,5.1,0z"></path></svg></div></div><div class="sc-fIegkK fAHlFk"><div class="sc-kyDMZS cZAtWE"><div class="sc-epUgiI gXCuYF"><div slidesize="216" class="sc-bsBUuZ coGbwD"><div transx="0px" slidesize="216px" class="sc-dmkKXv irjmrt"><div slidewidth="36" class="sc-gEcrUf dsQwSW"></div><div slidewidth="36" class="sc-gEcrUf qsTpb"><a data-qa-is-active-level="true" data-qa-is-bonus-level="false" data-qa-level-status="complete" data-qa-level-type="html" data-qa-level-index="1" class="sc-bbKJun crEXxp" href="https://learn.logikaschool.com/lesson?lesson=28452&amp;level=1&amp;module=1&amp;task=65917"><div class="sc-jjvwdq jlGBjs"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" style="color: rgb(15, 28, 44);"><path d="M13.293 3.293L11.707 1.707C11.318 1.318 10.55 1 10 1H3C2.45 1 2 1.45 2 2V14C2 14.55 2.45 15 3 15H13C13.55 15 14 14.55 14 14V5C14 4.45 13.682 3.682 13.293 3.293ZM8 11.5H4.132V10.5H8V11.5ZM11.868 9.158H4.132V8.158H11.868V9.158ZM11.868 6.816H4.132V5.816H11.868V6.816Z" fill="currentColor"></path></svg></div></a></div><div slidewidth="36" class="sc-gEcrUf qsTpb"><a data-qa-is-active-level="false" data-qa-is-bonus-level="false" data-qa-level-status="open" data-qa-level-type="html" data-qa-level-index="2" class="sc-bbKJun OVsU" href="https://learn.logikaschool.com/lesson?lesson=28452&amp;level=2&amp;module=1&amp;task=65917"><div class="sc-jjvwdq jlGBjs"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" style="color: rgb(255, 255, 255);"><path d="M13.293 3.293L11.707 1.707C11.318 1.318 10.55 1 10 1H3C2.45 1 2 1.45 2 2V14C2 14.55 2.45 15 3 15H13C13.55 15 14 14.55 14 14V5C14 4.45 13.682 3.682 13.293 3.293ZM8 11.5H4.132V10.5H8V11.5ZM11.868 9.158H4.132V8.158H11.868V9.158ZM11.868 6.816H4.132V5.816H11.868V6.816Z" fill="currentColor"></path></svg></div></a></div><div slidewidth="36" class="sc-gEcrUf qsTpb"><a data-qa-is-active-level="false" data-qa-is-bonus-level="false" data-qa-level-status="open" data-qa-level-type="html" data-qa-level-index="3" class="sc-bbKJun OVsU" href="https://learn.logikaschool.com/lesson?lesson=28452&amp;level=3&amp;module=1&amp;task=65917"><div class="sc-jjvwdq jlGBjs"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" style="color: rgb(255, 255, 255);"><path d="M13.293 3.293L11.707 1.707C11.318 1.318 10.55 1 10 1H3C2.45 1 2 1.45 2 2V14C2 14.55 2.45 15 3 15H13C13.55 15 14 14.55 14 14V5C14 4.45 13.682 3.682 13.293 3.293ZM8 11.5H4.132V10.5H8V11.5ZM11.868 9.158H4.132V8.158H11.868V9.158ZM11.868 6.816H4.132V5.816H11.868V6.816Z" fill="currentColor"></path></svg></div></a></div><div slidewidth="36" class="sc-gEcrUf qsTpb"><a data-qa-is-active-level="false" data-qa-is-bonus-level="false" data-qa-level-status="open" data-qa-level-type="html" data-qa-level-index="4" class="sc-bbKJun OVsU" href="https://learn.logikaschool.com/lesson?lesson=28452&amp;level=4&amp;module=1&amp;task=65917"><div class="sc-jjvwdq jlGBjs"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" style="color: rgb(255, 255, 255);"><path d="M13.293 3.293L11.707 1.707C11.318 1.318 10.55 1 10 1H3C2.45 1 2 1.45 2 2V14C2 14.55 2.45 15 3 15H13C13.55 15 14 14.55 14 14V5C14 4.45 13.682 3.682 13.293 3.293ZM8 11.5H4.132V10.5H8V11.5ZM11.868 9.158H4.132V8.158H11.868V9.158ZM11.868 6.816H4.132V5.816H11.868V6.816Z" fill="currentColor"></path></svg></div></a></div><div slidewidth="36" class="sc-gEcrUf dsQwSW"></div></div><div slidewidth="36" class="sc-hBlBmj sc-bAPsAg dfdyJI daVHFS"><svg width="26" height="27" viewBox="0 0 26 27" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="26" y="26.25" width="26" height="26" rx="13" transform="rotate(-180 26 26.25)"></rect><path d="M16.125 17.2862L16.125 9.21377C16.125 8.39648 15.1978 7.92433 14.5368 8.40503L8.98701 12.4413C8.43791 12.8406 8.43791 13.6594 8.98701 14.0587L14.5368 18.095C15.1978 18.5757 16.125 18.1035 16.125 17.2862Z" fill="white"></path></svg></div><div slidewidth="36" class="sc-hBlBmj dfdyJI"><svg width="26" height="27" viewBox="0 0 26 27" fill="none" xmlns="http://www.w3.org/2000/svg"><rect y="0.25" width="26" height="26" rx="13"></rect><path d="M9.875 9.21377L9.875 17.2862C9.875 18.1035 10.8022 18.5757 11.4632 18.095L17.013 14.0587C17.5621 13.6594 17.5621 12.8406 17.013 12.4413L11.4632 8.40504C10.8022 7.92433 9.875 8.39648 9.875 9.21377Z" fill="white"></path></svg></div></div></div></div></div><div class="sc-lcTvcx fNsMaz"><div class="sc-jrHiGu gUTILC"><button data-qa-id="marsogram-button" kind="darkTechnical" class="sc-eTNRI bFeltI sc-hJphhG OLnQT"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" height="24px" width="24px"><mask id="chat_svg__path-1-outside-1" maskUnits="userSpaceOnUse" x="0" y="0" width="24" height="24" fill="black"><rect fill="white" width="24" height="24"></rect><path d="M20.0802 4.03018C18.9683 3.05975 16.3003 2.01931 12.1602 2H12.0137C11.0411 2 6.07493 2.10139 3.88481 4.10742C2.66247 5.32891 2.06691 7.15148 2.01168 9.8455L2.00448 10.1086C1.95164 12.4116 2.3079 16.7568 6.2823 18.1062C6.27749 18.9728 5.80837 20.8847 5.80837 21.1068C5.80837 21.3362 5.90683 21.8093 6.28146 21.9565C6.35591 21.9855 6.43515 22 6.5192 22C6.73533 22 6.95627 21.8986 7.14118 21.7103C7.70312 21.1406 9.24485 19.277 9.75876 18.6518C10.0782 18.6663 10.4264 18.6759 10.7986 18.6759C13.5002 18.6759 16.9823 18.2583 17.2945 18.1569C17.3401 18.1424 17.4074 18.1279 17.4914 18.1062C18.4328 17.8841 21.2953 17.2106 21.8092 13.0199C22.3496 8.66023 21.7324 5.46651 20.0802 4.03018Z"></path></mask><path d="M20.0802 4.03018C18.9683 3.05975 16.3003 2.01931 12.1602 2H12.0137C11.0411 2 6.07493 2.10139 3.88481 4.10742C2.66247 5.32891 2.06691 7.15148 2.01168 9.8455L2.00448 10.1086C1.95164 12.4116 2.3079 16.7568 6.2823 18.1062C6.27749 18.9728 5.80837 20.8847 5.80837 21.1068C5.80837 21.3362 5.90683 21.8093 6.28146 21.9565C6.35591 21.9855 6.43515 22 6.5192 22C6.73533 22 6.95627 21.8986 7.14118 21.7103C7.70312 21.1406 9.24485 19.277 9.75876 18.6518C10.0782 18.6663 10.4264 18.6759 10.7986 18.6759C13.5002 18.6759 16.9823 18.2583 17.2945 18.1569C17.3401 18.1424 17.4074 18.1279 17.4914 18.1062C18.4328 17.8841 21.2953 17.2106 21.8092 13.0199C22.3496 8.66023 21.7324 5.46651 20.0802 4.03018Z" stroke="currentColor" stroke-width="3" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" mask="url(#chat_svg__path-1-outside-1)"></path><path d="M7 8H17M7 10.5H17M7 13H13.4286" stroke="currentColor" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"></path></svg></button></div></div><button class="sc-fxPjmO VjMTy"><div class="sc-cAwXzf cYBWum">Немченко Назар</div><div class="sc-cAwXzf cYBWum"><span>Вихід</span></div></button></div><div class="sc-jmmULC iVaOdz"><div class="sc-bLrFDB McAPx"><div class="sc-hDUTmO huHxjO"><template shadowrootmode="open"><p align="center"><font color="black" size="5"><b>Скрипт, за допомогою якого можна змінити <span class="colorred">матеріал </span> деталі:</b></font></p><style> .colorred { color: red;} .colorgreen { color: green;} .colorblue { color: blue;}</style><br><font color="black" size="4">function <span class="colorgreen"><u style="text-decoration: green wavy underline;">button1</u></span>()</font><br><font color="black" size="4">&nbsp;&nbsp;&nbsp;&nbsp;game.Workspace.<span class="colorblue"><u style="text-decoration: blue wavy underline;">Button1</u></span>.Material = Enum.Material.<span class="colorred"><u style="text-decoration: red wavy underline;">Neon</u></span></font><br><font color="black" size="4">end</font><br><font color="black" size="4">game.Workspace.<span class="colorblue"><u style="text-decoration: blue wavy underline;">Button1</u></span>.Touched:Connect(<span class="colorgreen"><u style="text-decoration: green wavy underline;">button1</u></span>)</font><style>
+  img {
+    max-width: 100%;
+    height: auto;
+    object-fit: contain;
+  }
+
+  iframe,
+  video {
+    max-width: 100%;
+    min-height: 500px;
+  }
+
+  @media (max-height: 760px) {
+    iframe,
+    video {
+      min-height: 400px;
+    }
+  }
+</style></template></div><div class="sc-kKYywp fSyaAM"><button kind="warning" class="sc-eTNRI cRcWtp" style="width: 400px;"><span class="sc-brSamD jkOngP"><span>Далі</span></span></button></div></div></div></div></div>
+
+      
+
+<div id=":r1t:" data-floating-ui-portal=""></div><div id=":r20:" data-floating-ui-portal=""></div></body></html>

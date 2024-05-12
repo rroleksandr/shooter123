@@ -15,10 +15,10 @@ win = font2.render('YOU WIN!', True, (255, 255, 255))
 lose = font2.render('YOU LOSE!', True, (180, 0, 0))
 
 
-img_back = "nochnoe-nebo-izmenilos-i-uchenye-ne-znajut-pochemu-ba1b2a1.jpg"
+img_back = "istockphoto-1328626378-640x640.jpg"
 img_hero = "klipartz.com.png"
-img_enemy = "ufo.png"
-img_ast = "asteroid.png"
+img_enemy = "pngwing.com.png"
+img_ast = "pngegg.png"
 img_health = "pngwing.com.png"
 #new_bullet_img = "bul.png"
 score = 0
@@ -165,7 +165,7 @@ while run:
         bullets.update()
         asteroids.update()
         enemy_bullets.update()
-        enemy_bullets.shoot()
+        #enemy_bullets.shoot()
         
         health_packs.update()
         health_packs.draw(window)
